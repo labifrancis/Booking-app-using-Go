@@ -10,7 +10,7 @@ func main() {
 	fmt.Printf("We have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
-	fmt.Printf("conferenceName is a %T, conferenceTickets is a %T, remainingTickets is a %T\n", conferenceName, conferenceTickets, remainingTickets)
+	var bookings = [50]string{"Nana", "Nicole", "Peter"}
 
 	var firstName string
 	var lasttName string
@@ -31,4 +31,6 @@ func main() {
 	remainingTickets = remainingTickets - userTickets
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lasttName, userTickets, email)
 	fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
+
+	//Next commit Arrays and Slices
 }
