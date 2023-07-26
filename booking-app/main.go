@@ -13,36 +13,38 @@ func main() {
 	// Declare bookings as an empty slice instead of fixed array
 	var bookings []string
 
-	// Print details about slice
+	for {
+		var firstName string
+		var lasttName string
+		var email string
+		var userTickets uint
+		// ask user for their name
+		fmt.Println("Enter your first name:")
+		fmt.Scan(&firstName)
 
-	var firstName string
-	var lasttName string
-	var email string
-	var userTickets uint
-	// ask user for their name
-	fmt.Println("Enter your first name:")
-	fmt.Scan(&firstName)
+		fmt.Println("Enter your last name:")
+		fmt.Scan(&lasttName)
 
-	fmt.Println("Enter your last name:")
-	fmt.Scan(&lasttName)
+		fmt.Println("Enter your email address:")
+		fmt.Scan(&email)
 
-	fmt.Println("Enter your email address:")
-	fmt.Scan(&email)
+		fmt.Println("Enter number of tickets:")
+		fmt.Scan(&userTickets)
+		remainingTickets = remainingTickets - userTickets
 
-	fmt.Println("Enter number of tickets:")
-	fmt.Scan(&userTickets)
-	remainingTickets = remainingTickets - userTickets
+		// Append user's name to bookings slice
 
-	// Append user's name to bookings slice
+		bookings = append(bookings, firstName+" "+lasttName)
 
-	bookings = append(bookings, firstName+" "+lasttName)
+		// Thank you message
+		fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lasttName, userTickets, email)
 
-	// Print details about slice
-	fmt.Printf("Print the whole Slice: %v\n", bookings)
-	fmt.Printf("Print the first value of the Slice: %v\n", bookings[0])
-	fmt.Printf("Slice type: %T\n", bookings)
-	fmt.Printf("Slice length: %v\n", len(bookings))
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lasttName, userTickets, email)
-	fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
+		//Tickets remaining
+		fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
+
+		// All oour bookings
+		fmt.Printf("These are all our bookings %v\n", bookings)
+
+	}
 
 }
