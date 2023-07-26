@@ -10,7 +10,10 @@ func main() {
 	fmt.Printf("We have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
-	var bookings = [50]string{}
+	// Declare bookings as an empty slice instead of fixed array
+	var bookings []string
+
+	// Print details about slice
 
 	var firstName string
 	var lasttName string
@@ -30,13 +33,16 @@ func main() {
 	fmt.Scan(&userTickets)
 	remainingTickets = remainingTickets - userTickets
 
-	bookings[0] = firstName + " " + lasttName
-	fmt.Printf("Print the whole array: %v\n", bookings)
-	fmt.Printf("Print the first value of the array: %v\n", bookings[0])
-	fmt.Printf("Array type: %T\n", bookings)
-	fmt.Printf("Array length: %v\n", len(bookings))
+	// Append user's name to bookings slice
+
+	bookings = append(bookings, firstName+" "+lasttName)
+
+	// Print details about slice
+	fmt.Printf("Print the whole Slice: %v\n", bookings)
+	fmt.Printf("Print the first value of the Slice: %v\n", bookings[0])
+	fmt.Printf("Slice type: %T\n", bookings)
+	fmt.Printf("Slice length: %v\n", len(bookings))
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lasttName, userTickets, email)
 	fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
 
-	//Next commit Arrays and Slices
 }
