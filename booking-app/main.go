@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	var conferenceName string = "Go Conference"
@@ -14,10 +17,12 @@ func main() {
 	var bookings []string
 
 	for {
+		// Declare variables
 		var firstName string
 		var lasttName string
 		var email string
 		var userTickets uint
+
 		// ask user for their name
 		fmt.Println("Enter your first name:")
 		fmt.Scan(&firstName)
@@ -30,10 +35,11 @@ func main() {
 
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
+
+		//remaoning tickets
 		remainingTickets = remainingTickets - userTickets
 
 		// Append user's name to bookings slice
-
 		bookings = append(bookings, firstName+" "+lasttName)
 
 		// Thank you message
@@ -42,8 +48,15 @@ func main() {
 		//Tickets remaining
 		fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
 
-		// All oour bookings
-		fmt.Printf("These are all our bookings %v\n", bookings)
+		// Slice to get first names
+		firstNames := []string{}
+		for _, booking := range bookings {
+			var names = strings.Fields(booking)
+			//var firstName = names[0]
+			firstNames = append(firstNames, names[0])
+		}
+		// All our bookings
+		fmt.Printf("The first names of bookings are: %v\n", firstNames)
 
 	}
 
