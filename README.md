@@ -4,4 +4,6 @@ I'm taking a beginner course on Golang by [TechWorld With Nana](https://youtu.be
 # Sourcegraph Cody in Action
 Selected a line of code and prompted it for more context on the error *"What's wrong here?"*
 ![Cody in Action](images/cody2.png)
+
+Another example: 
 ![Cody in Action](images/cody.png)
