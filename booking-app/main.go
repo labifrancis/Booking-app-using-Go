@@ -36,37 +36,39 @@ func main() {
 		fmt.Println("Enter number of tickets:")
 		fmt.Scan(&userTickets)
 
-		if userTickets > remainingTickets {
+		if userTickets <= remainingTickets {
+			//remaoning tickets
+			remainingTickets = remainingTickets - userTickets
+
+			// Append user's name to bookings slice
+			bookings = append(bookings, firstName+" "+lasttName)
+
+			// Thank you message
+			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lasttName, userTickets, email)
+
+			//Tickets remaining
+			fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
+
+			// Slice to get first names
+			firstNames := []string{}
+			for _, booking := range bookings {
+				var names = strings.Fields(booking)
+				//var firstName = names[0]
+				firstNames = append(firstNames, names[0])
+			}
+			// All our bookings
+			fmt.Printf("The first names of bookings are: %v\n", firstNames)
+
+			if remainingTickets == 0 {
+
+				//end program
+				println("Our conference is booked full. Come back next year!")
+				break
+
+			}
+
+		} else {
 			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets.\n", remainingTickets, userTickets)
-			continue
-		}
-		//remaoning tickets
-		remainingTickets = remainingTickets - userTickets
-
-		// Append user's name to bookings slice
-		bookings = append(bookings, firstName+" "+lasttName)
-
-		// Thank you message
-		fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lasttName, userTickets, email)
-
-		//Tickets remaining
-		fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
-
-		// Slice to get first names
-		firstNames := []string{}
-		for _, booking := range bookings {
-			var names = strings.Fields(booking)
-			//var firstName = names[0]
-			firstNames = append(firstNames, names[0])
-		}
-		// All our bookings
-		fmt.Printf("The first names of bookings are: %v\n", firstNames)
-
-		if remainingTickets == 0 {
-
-			//end program
-			println("Our conference is booked full. Come back next year!")
-			break
 
 		}
 
