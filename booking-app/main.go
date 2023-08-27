@@ -3,18 +3,27 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
-	"strconv"
 	"strings"
 	//"strings"
 )
 
-func main() {
-	var conferenceName string = "Go Conference"
-	const conferenceTickets int = 50
-	var remainingTickets uint = 50
-	var bookings = make([]map[string]string, 0)
+var conferenceName string = "Go Conference"
 
-	greetUsers(conferenceName, conferenceTickets, remainingTickets)
+const conferenceTickets int = 50
+
+var remainingTickets uint = 50
+var bookings = make([]userData, 0)
+
+type userData struct {
+	firstName       string
+	lastName        string
+	email           string
+	numberOfTickets uint
+}
+
+func main() {
+
+	greetUsers()
 
 	for {
 		firstName, lastName, email, userTickets := getUserInput()
@@ -22,10 +31,10 @@ func main() {
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
-			bookTickets(remainingTickets, userTickets, bookings, firstName, lastName, email, conferenceName)
+			bookTickets(userTickets, firstName, lastName, email)
 
 			// call function to print first names
-			firstNames := getFirstNames(bookings)
+			firstNames := getFirstNames()
 			fmt.Printf("The first names of bookings are: %v\n", firstNames)
 
 			if remainingTickets == 0 {
@@ -54,16 +63,17 @@ func main() {
 
 }
 
-func greetUsers(confName string, confTickets int, remainingTickets uint) {
-	fmt.Printf("Welcome to our %v booking application\n", confName)
-	fmt.Printf("We have a total of %v tickets and %v are still available\n", confTickets, remainingTickets)
+func greetUsers() {
+	fmt.Printf("Welcome to our %v booking application\n", conferenceName)
+	fmt.Printf("We have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 }
 
 func getFirstNames() []string {
+	firstNames := []string{}
 	for _, booking := range bookings {
 		//var firstName = names[0]
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
@@ -99,21 +109,20 @@ func getUserInput() (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func bookTickets(remainingTickets uint, userTickets uint, bookings []string, firstName string, lastName string, email string, conferenceName string) {
+func bookTickets(userTickets uint, firstName string, lastName string, email string) {
 	// remaoning tickets
 	remainingTickets = remainingTickets - userTickets
 
 	// craete map for a user \
-	var userData = make(map[string]string)
-
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+	var userData = userData{
+		firstName:       firstName,
+		lastName:        lastName,
+		email:           email,
+		numberOfTickets: userTickets,
+	}
 
 	// Append user's name to bookings slice
 	bookings = append(bookings, userData)
-	fmt.Printf("List of bookings %v")
 
 	fmt.Printf("List of bookings is %v\n", bookings)
 
