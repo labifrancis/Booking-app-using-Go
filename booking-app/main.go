@@ -4,6 +4,7 @@ import (
 	"booking-app/helper"
 	"fmt"
 	"strings"
+	"time"
 	//"strings"
 )
 
@@ -32,6 +33,7 @@ func main() {
 		if isValidName && isValidEmail && isValidTicketNumber {
 
 			bookTickets(userTickets, firstName, lastName, email)
+			sendTickets(userTickets, firstName, lastName, email)
 
 			// call function to print first names
 			firstNames := getFirstNames()
@@ -131,4 +133,14 @@ func bookTickets(userTickets uint, firstName string, lastName string, email stri
 
 	// Tickets remaining
 	fmt.Printf("%v tickets remaing for %v \n", remainingTickets, conferenceName)
+}
+
+func sendTickets(userTickets uint, firstName string, lastName string, email string) {
+	// delays execution of the thread for 10 secs
+	time.Sleep(10 * time.Second)
+
+	var ticket = fmt.Sprintf("%v  tickets for %v %v have been emailed to you. Enjoy the conference!\n", userTickets, firstName, lastName)
+	fmt.Println("##################")
+	fmt.Printf("Sending ticket: \n %v \nto email address %v\n", ticket, email)
+	fmt.Println("##################")
 }
