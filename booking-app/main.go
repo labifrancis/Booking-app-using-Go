@@ -3,17 +3,18 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	"strconv"
 	"strings"
+	//"strings"
 )
 
 func main() {
 	var conferenceName string = "Go Conference"
 	const conferenceTickets int = 50
 	var remainingTickets uint = 50
-	greetUsers(conferenceName, conferenceTickets, remainingTickets)
+	var bookings = make([]map[string]string, 0)
 
-	// Declare bookings as an empty slice instead of fixed array
-	var bookings []string
+	greetUsers(conferenceName, conferenceTickets, remainingTickets)
 
 	for {
 		firstName, lastName, email, userTickets := getUserInput()
@@ -59,16 +60,13 @@ func greetUsers(confName string, confTickets int, remainingTickets uint) {
 	fmt.Println("Get your tickets here to attend")
 }
 
-func getFirstNames(bookings []string) []string {
-	firstNames := []string{}
+func getFirstNames() []string {
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
 		//var firstName = names[0]
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, booking["firstName"])
 	}
 	return firstNames
 }
-
 
 func validateUserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint) (bool, bool, bool) {
 	isValidName := len(firstName) >= 2 && len(lastName) >= 2
@@ -105,8 +103,19 @@ func bookTickets(remainingTickets uint, userTickets uint, bookings []string, fir
 	// remaoning tickets
 	remainingTickets = remainingTickets - userTickets
 
+	// craete map for a user \
+	var userData = make(map[string]string)
+
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
 	// Append user's name to bookings slice
-	bookings = append(bookings, firstName+" "+lastName)
+	bookings = append(bookings, userData)
+	fmt.Printf("List of bookings %v")
+
+	fmt.Printf("List of bookings is %v\n", bookings)
 
 	// Thank you message
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
