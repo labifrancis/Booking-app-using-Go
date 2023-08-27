@@ -33,7 +33,8 @@ func main() {
 		if isValidName && isValidEmail && isValidTicketNumber {
 
 			bookTickets(userTickets, firstName, lastName, email)
-			sendTickets(userTickets, firstName, lastName, email)
+			// adding the go keyword to run the function concurrently
+			go sendTickets(userTickets, firstName, lastName, email)
 
 			// call function to print first names
 			firstNames := getFirstNames()
